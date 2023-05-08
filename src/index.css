@@ -1,0 +1,278 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Lato&family=Merriweather:wght@300;400&family=Montserrat:ital,wght@0,400;0,700;1,400&family=Neucha&family=Poppins&family=Raleway&family=Roboto&family=Sacramento&display=swap");
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: "Poppins", sans-serif;
+}
+
+.home {
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	flex-direction: row;
+	padding: 0px 30px;
+}
+
+.home .home_left {
+	width: 30%;
+	display: flex;
+	flex-direction: column;
+	padding: 0 10px;
+}
+
+.home .home_right {
+	width: 70%;
+}
+
+.home_left .profile_pic {
+	cursor: pointer;
+	position: relative;
+	bottom: 20px;
+}
+
+.home_left .profile_pic img {
+	width: 90%;
+	height: 100%;
+	z-index: 50;
+}
+
+.home_left .profile_info {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	bottom: 10px;
+}
+
+.home_left .profile_info .fullname {
+	font-size: 1.6rem;
+	color: black;
+	font-weight: 600;
+}
+
+.home_left .profile_info .username {
+	font-size: 1.3rem;
+	color: rgb(103, 95, 95);
+	margin-bottom: 10px;
+}
+
+.home_left .profile_info .title {
+	font-size: 1.1rem;
+	color: black;
+	font-weight: 300;
+}
+
+.home_left .profile_info .edit_profile_btn {
+	margin: 20px 0px;
+	cursor: pointer;
+	height: 40px;
+	border-radius: 5px;
+	border: none;
+	font-size: 15px;
+	font-weight: 300;
+}
+
+.home_left .profile_info .edit_profile_btn:hover {
+	background: lightgray;
+}
+
+.home_left .profile_info .statistics {
+	display: flex;
+	gap: 10px;
+	margin-bottom: 10px;
+	font-size: 14px;
+}
+
+.home_left .profile_info .statistics .followers {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+}
+
+.other_info {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	font-size: 14px;
+}
+
+.other_info .address {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+}
+
+.other_info .state {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+}
+
+.other_info .time_zone {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+}
+
+.other_info .website {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+}
+
+.search_bar {
+	padding: 15px 10px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.search_bar .home_search_input {
+	width: 50%;
+	height: 30px;
+	padding: 10px;
+	font-size: 14px;
+	border: none;
+	border-radius: 5px;
+	border: 1px solid lightgray;
+	cursor: pointer;
+}
+
+.search_bar .home_search_input:focus {
+	border: 1px solid blue;
+}
+
+.search_bar_btns {
+	display: flex;
+	gap: 10px;
+}
+
+.search_bar_btns #type {
+	color: black;
+	background-color: rgb(241, 234, 234);
+	width: 80px;
+	height: 30px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	text-align: center;
+	-webkit-appearance: none;
+	font-size: 13px;
+	font-weight: 600px;
+}
+
+.search_bar_btns #language {
+	color: black;
+	background-color: rgb(241, 234, 234);
+	width: 120px;
+	height: 30px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	text-align: center;
+	-webkit-appearance: none;
+	font-size: 13px;
+	font-weight: 600px;
+}
+
+.search_bar_btns #sort {
+	color: black;
+	background-color: rgb(241, 234, 234);
+	width: 80px;
+	height: 30px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	text-align: center;
+	-webkit-appearance: none;
+	font-size: 13px;
+	font-weight: 600px;
+}
+
+.search_bar_btn {
+	width: 80px;
+	background: green;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	align-items: center;
+	display: flex;
+	justify-content: space-around;
+	cursor: pointer;
+}
+
+.search_bar_btn span {
+	display: flex;
+	align-items: center;
+	gap: 3px;
+}
+
+.search_bar_btn .tab_icon {
+	color: white;
+	text-align: center;
+}
+
+.home_right hr {
+	color: lightgray;
+	border: 1px solid lightgray;
+	height: 1px;
+}
+
+.home_left form {
+	display: flex;
+	flex-direction: column;
+	/* gap: 10px; */
+}
+.home_left form input {
+	width: 90%;
+	height: 30px;
+	border-radius: 5px;
+	border: 1px solid gray;
+	padding: 10px;
+	margin-bottom: 10px;
+}
+
+.home_left form textarea {
+	width: 90%;
+	border-radius: 5px;
+	border: 1px solid gray;
+	padding: 10px;
+	margin-bottom: 10px;
+}
+
+.home_left form .form_field {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+}
+.home_left form .form_field input {
+	width: 82%;
+}
+
+.home_left form .form_btns {
+	display: flex;
+	gap: 10px;
+	margin-top: 10px;
+}
+
+.home_left form .form_btns #save {
+	font-size: 12px;
+	background: green;
+	color: white;
+	border: none;
+	padding: 5px 10px;
+	border-radius: 5px;
+	cursor: pointer;
+}
+.home_left form .form_btns #cancel {
+	font-size: 12px;
+	border: none;
+	padding: 5px 10px;
+	border-radius: 5px;
+	cursor: pointer;
+	background: rgb(241, 234, 234);
+}
+
+.home_left form .form_btns #cancel:hover {
+	background: rgb(223, 214, 214);
+}
