@@ -11,7 +11,6 @@ import { useState, useEffect } from "react";
 import { updateProfile } from "../redux/features/profileSlice";
 import Repo from "../components/Repo";
 import { getAllRepos } from "../redux/features/repoSlice";
-
 import { ThunkDispatch } from "@reduxjs/toolkit";
 
 const Home = () => {
@@ -24,8 +23,9 @@ const Home = () => {
 	const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
 
 	let time = new Date();
-
 	let currentTime = `${time.getHours()}:${time.getMinutes()}`;
+
+	const [searchText, setSearchText] = useState<string>("");
 
 	interface Profile {
 		name: string;
@@ -34,15 +34,6 @@ const Home = () => {
 		address: string;
 		website: string;
 	}
-
-	// interface RepoTypes {
-	// 	key: any;
-	// 	repoName: string;
-	// 	repoDescription: string;
-	// 	repoPrivate: boolean;
-	// 	repoLanguage: string;
-	// 	repoUpdated: any;
-	// }
 
 	const [updatedProfile, setUpdatedProfile] = useState<Profile>({
 		name: name,
@@ -61,6 +52,11 @@ const Home = () => {
 		});
 	};
 
+	const handleSearch = (e: React.FormEvent) => {
+		const target = e.target as HTMLInputElement;
+		setSearchText(target.value);
+	};
+
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
 
@@ -68,6 +64,10 @@ const Home = () => {
 		dispatch(updateProfile(updatedProfile));
 		setIsEditing(false);
 	};
+
+	const filteredResults = repos.filter((repo: any) =>
+		repo.name.toLowerCase().includes(searchText.toLowerCase())
+	);
 
 	useEffect(() => {
 		dispatch(getAllRepos());
@@ -96,8 +96,8 @@ const Home = () => {
 							<textarea
 								name="bio"
 								id="bio"
-								cols="30"
-								rows="4"
+								cols={30}
+								rows={4}
 								onChange={handleChange}
 								value={updatedProfile.bio}
 							></textarea>
@@ -192,6 +192,7 @@ const Home = () => {
 				<div className="home_right">
 					<div className="search_bar">
 						<input
+							onChange={handleSearch}
 							className="home_search_input"
 							type="text"
 							placeholder="Find a repository..."
@@ -218,7 +219,16 @@ const Home = () => {
 						</div>
 					</div>
 					<hr />
-					{repos.map((repo: any, i: any): any => (
+					{/* {repos
+						.filter((repo: any) => {
+							return searchText.toLowerCase() === ""
+								? repo
+								: repo.name.toLowerCase().includes(searchText);
+						})
+						.map((repo: any, i: any): any => (
+							<Repo key={i} repo={repo} />
+						))} */}
+					{filteredResults.map((repo: any, i: any): any => (
 						<Repo key={i} repo={repo} />
 					))}
 				</div>

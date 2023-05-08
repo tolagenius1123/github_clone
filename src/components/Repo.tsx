@@ -1,20 +1,12 @@
 import "./reusables.css";
-
-// interface RepoTypes {
-// 	key: any;
-// 	repoName: string;
-// 	repoDescription: string;
-// 	repoPrivate: boolean;
-// 	repoLanguage: string;
-// 	repoUpdated: any;
-// }
+import moment from "moment";
 
 interface RepoTypes {
 	repo: any;
 }
 
 const Repo = ({ repo }: RepoTypes) => {
-	console.log(repo);
+	const lastUpdated = moment(repo.updated_at).startOf("day").fromNow();
 
 	return (
 		<>
@@ -31,7 +23,7 @@ const Repo = ({ repo }: RepoTypes) => {
 							<div className="language">{repo.language}</div>
 						</div>
 						<div className="last_updated">
-							Updated {repo.updated_at}
+							Updated {lastUpdated}
 						</div>
 					</div>
 				</div>

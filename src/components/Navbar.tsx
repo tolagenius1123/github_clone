@@ -9,15 +9,15 @@ import { useState } from "react";
 const Navbar = () => {
 	const [hideNav, setHideNav] = useState<boolean>(false);
 
-	const handleNav = () => {
-		if (window.scrollY >= 50) {
+	const handleScrollDown = () => {
+		if (window.scrollY >= 70) {
 			setHideNav(true);
 		} else {
 			setHideNav(false);
 		}
 	};
 
-	window.addEventListener("scroll", handleNav);
+	window.addEventListener("scroll", handleScrollDown);
 
 	return (
 		<nav className={hideNav ? "navbar_scroll" : "navbar"}>
@@ -28,7 +28,7 @@ const Navbar = () => {
 				<div className="search_bar">
 					<BiSearch className="search_icon" />
 					<input type="text" placeholder="Search or jump to..." />
-					<div className="slash">/</div>
+					{/* <div className="slash">/</div> */}
 				</div>
 				<div className="links">
 					<a href="">Pull requests</a>
