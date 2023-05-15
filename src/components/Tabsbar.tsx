@@ -5,10 +5,14 @@ import { FiPackage } from "react-icons/fi";
 import { AiOutlineStar } from "react-icons/ai";
 import "./reusables.css";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 const Tabsbar = () => {
 	const [tab, setTab] = useState<number>(2);
 	const [tabsStyle, setTabsStyle] = useState<boolean>(false);
+	const profileInfo = useSelector((state: any) => state.profile.profile);
+
+	const { public_repos } = profileInfo;
 
 	const fixNavbar = () => {
 		if (window.scrollY >= 70) {
@@ -39,7 +43,7 @@ const Tabsbar = () => {
 						className={tab === 2 ? "tab_icon_select" : "tab_icon"}
 					/>
 					<p>Repositories</p>
-					<span>6</span>
+					<span>{public_repos}</span>
 				</div>
 				<div
 					className={tab === 3 ? "tab_select" : "tab"}
@@ -67,7 +71,7 @@ const Tabsbar = () => {
 						className={tab === 5 ? "tab_icon_select" : "tab_icon"}
 					/>
 					<p>Stars</p>
-					<span>5</span>
+					{/* <span>5</span> */}
 				</div>
 			</div>
 		</div>

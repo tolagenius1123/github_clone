@@ -1,6 +1,5 @@
 import Navbar from "../components/Navbar";
 import Tabsbar from "../components/Tabsbar";
-import portrait from "../assets/portrait.png";
 import { BsPeople } from "react-icons/bs";
 import { BiBuildingHouse, BiLink } from "react-icons/bi";
 import { GoLocation } from "react-icons/go";
@@ -8,7 +7,7 @@ import { BsClock } from "react-icons/bs";
 import { RiGitRepositoryLine } from "react-icons/ri";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
-import { updateProfile } from "../redux/features/profileSlice";
+import { getProfileData, updateProfile } from "../redux/features/profileSlice";
 import Repo from "../components/Repo";
 import { getAllRepos } from "../redux/features/repoSlice";
 import { ThunkDispatch } from "@reduxjs/toolkit";
@@ -16,8 +15,19 @@ import { ThunkDispatch } from "@reduxjs/toolkit";
 const Home = () => {
 	const profileInfo = useSelector((state: any) => state.profile.profile);
 	const repos = useSelector((state: any) => state.repos.repos);
+	const loginData = JSON.parse(localStorage.getItem("loginEmail") || "");
 
-	const { name, bio, company, address, website } = profileInfo;
+	const {
+		avatar_url,
+		name,
+		login,
+		bio,
+		followers,
+		following,
+		company,
+		location,
+		blog,
+	} = profileInfo;
 
 	const [isEditing, setIsEditing] = useState<boolean>(false);
 	const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
@@ -31,16 +41,16 @@ const Home = () => {
 		name: string;
 		bio: string;
 		company: string;
-		address: string;
-		website: string;
+		location: string;
+		blog: string;
 	}
 
 	const [updatedProfile, setUpdatedProfile] = useState<Profile>({
 		name: name,
 		bio: bio,
 		company: company,
-		address: address,
-		website: website,
+		location: location,
+		blog: blog,
 	});
 
 	const handleChange = (e: React.FormEvent) => {
@@ -70,7 +80,8 @@ const Home = () => {
 	);
 
 	useEffect(() => {
-		dispatch(getAllRepos());
+		dispatch(getAllRepos(loginData));
+		dispatch(getProfileData(loginData));
 	}, []);
 
 	return (
@@ -80,7 +91,7 @@ const Home = () => {
 			<div className="home">
 				<div className="home_left">
 					<div className="profile_pic">
-						<img src={portrait} alt="" />
+						<img src={avatar_url} alt="" />
 					</div>
 					{isEditing ? (
 						<form onSubmit={handleSubmit}>
@@ -114,27 +125,27 @@ const Home = () => {
 								/>
 							</div>
 							<div className="form_field">
-								<label htmlFor="address">
+								<label htmlFor="location">
 									<GoLocation />
 								</label>
 								<input
 									type="text"
-									id="address"
-									name="address"
+									id="location"
+									name="location"
 									onChange={handleChange}
-									value={updatedProfile.address}
+									value={updatedProfile.location}
 								/>
 							</div>
 							<div className="form_field">
-								<label htmlFor="website">
+								<label htmlFor="blog">
 									<BiLink />
 								</label>
 								<input
 									type="text"
-									id="website"
-									name="website"
+									id="blog"
+									name="blog"
 									onChange={handleChange}
-									value={updatedProfile.website}
+									value={updatedProfile.blog}
 								/>
 							</div>
 							<div className="form_btns">
@@ -152,7 +163,7 @@ const Home = () => {
 					) : (
 						<div className="profile_info">
 							<div className="fullname">{name}</div>
-							<div className="username">tolagenius1123</div>
+							<div className="username">{login}</div>
 							<div className="title">{bio}</div>
 							<button
 								className="edit_profile_btn"
@@ -162,9 +173,12 @@ const Home = () => {
 							</button>
 							<div className="statistics">
 								<div className="followers">
-									<BsPeople />7 followers
+									<BsPeople />
+									{followers} followers
 								</div>
-								<div className="following">.10 following</div>
+								<div className="following">
+									.{following} following
+								</div>
 							</div>
 							<div className="other_info">
 								<p className="address">
@@ -173,7 +187,7 @@ const Home = () => {
 								</p>
 								<p className="state">
 									<GoLocation />
-									{address}
+									{location}
 								</p>
 								<p className="time_zone">
 									<BsClock />
@@ -181,9 +195,7 @@ const Home = () => {
 								</p>
 								<p className="website">
 									<BiLink />
-									<a href="https://tolareactprofile.netlify.app/">
-										{website}
-									</a>
+									<a href={blog}>{blog}</a>
 								</p>
 							</div>
 						</div>

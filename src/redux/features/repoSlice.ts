@@ -13,13 +13,16 @@ const initialState: initialStateTypes = {
 	error: "",
 };
 
-export const getAllRepos = createAsyncThunk("repos/getAllRepos", async () => {
-	const response = await axios.get(
-		"https://api.github.com/users/tolagenius1123/repos"
-	);
-	console.log(response.data);
-	return response.data;
-});
+export const getAllRepos = createAsyncThunk(
+	"repos/getAllRepos",
+	async (username: string) => {
+		const response = await axios.get(
+			`https://api.github.com/users/${username}/repos`
+		);
+		console.log(response.data);
+		return response.data;
+	}
+);
 
 const repoSlice = createSlice({
 	name: "repos",
