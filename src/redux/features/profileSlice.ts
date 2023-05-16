@@ -33,22 +33,6 @@ const initialState: profileTypes = {
 	},
 	status: "",
 	error: "",
-	// profile: localStorage.getItem("profile")
-	// 	? JSON.parse(localStorage.getItem("profile") || "{}")
-	// 	: {
-	// 			avatar_url: "",
-	// 			name: "",
-	// 			login: "",
-	// 			bio: "",
-	// 			followers: 0,
-	// 			following: 0,
-	// 			company: "",
-	// 			location: "",
-	// 			blog: "",
-	// 			public_repos: 0,
-	// 	  },
-	// status: "",
-	// error: "",
 };
 
 export const getProfileData = createAsyncThunk(
@@ -68,8 +52,15 @@ const profileSlice = createSlice({
 	initialState,
 	reducers: {
 		updateProfile: (state, action) => {
-			state.profile = action.payload;
-			// localStorage.setItem("profile", JSON.stringify(state.profile));
+			let { name, bio, company, location, blog } = action.payload;
+			console.log(action.payload);
+
+			state.profile.name = name;
+			state.profile.bio = bio;
+			state.profile.company = company;
+			state.profile.location = location;
+			state.profile.blog = blog;
+			localStorage.setItem("profile", JSON.stringify(state.profile));
 		},
 	},
 	extraReducers: (builder) => {

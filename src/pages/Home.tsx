@@ -45,12 +45,20 @@ const Home = () => {
 		blog: string;
 	}
 
+	// const [updatedProfile, setUpdatedProfile] = useState<Profile>({
+	// 	name: name,
+	// 	bio: bio,
+	// 	company: company,
+	// 	location: location,
+	// 	blog: blog,
+	// });
+
 	const [updatedProfile, setUpdatedProfile] = useState<Profile>({
-		name: name,
-		bio: bio,
-		company: company,
-		location: location,
-		blog: blog,
+		name: "",
+		bio: "",
+		company: "",
+		location: "",
+		blog: "",
 	});
 
 	const handleChange = (e: React.FormEvent) => {
